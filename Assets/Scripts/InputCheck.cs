@@ -12,7 +12,7 @@ public class InputCheck : MonoBehaviour
     public Quaternion attitude;
     public Vector3 linear_acceleration;
     public Vector3 magnetic;
-    public float ligth;
+    public float my_light;
     public float pressure;
     public float proximity;
     public float humidity;
@@ -113,7 +113,7 @@ public class InputCheck : MonoBehaviour
         attitude = AttitudeSensor.current.attitude.ReadValue();
         linear_acceleration = LinearAccelerationSensor.current.acceleration.ReadValue();
         magnetic = MagneticFieldSensor.current.magneticField.ReadValue();
-        ligth = LightSensor.current.lightLevel.ReadValue();
+        my_light = LightSensor.current.lightLevel.ReadValue();
         pressure = PressureSensor.current.atmosphericPressure.ReadValue();
         proximity = ProximitySensor.current.distance.ReadValue();
         humidity = HumiditySensor.current.relativeHumidity.ReadValue();
@@ -135,17 +135,31 @@ public class InputCheck : MonoBehaviour
         
         var sp = ps_main.simulationSpeed;
         sp = Math.Abs(accelerometer.x + accelerometer.y + accelerometer.z) / 3;
+        
         var startsize = ps_main.startSize;
         startsize = Math.Abs(magnetic.x + magnetic.y + magnetic.z) / 10;
-        Debug.Log(ligth);
+        Debug.Log(my_light);
+        
         var st_col = ps_main.startColor;
-        st_col.color = new Color32((byte)(255 - ligth / 10), (byte)(ps_main.startColor.color.g), (byte)(ps_main.startColor.color.b), (byte)1);
+        st_col.color = new Color32((byte)(255 - my_light / 10), (byte)(ps_main.startColor.color.g), (byte)(ps_main.startColor.color.b), (byte)1);
         
     }
 
 
     void OnGUI()
     {
+        accelerometer = Accelerometer.current.acceleration.ReadValue();
+        gyroscope = UnityEngine.InputSystem.Gyroscope.current.angularVelocity.ReadValue();
+        gravity = GravitySensor.current.gravity.ReadValue();
+        attitude = AttitudeSensor.current.attitude.ReadValue();
+        linear_acceleration = LinearAccelerationSensor.current.acceleration.ReadValue();
+        magnetic = MagneticFieldSensor.current.magneticField.ReadValue();
+        my_light = LightSensor.current.lightLevel.ReadValue();
+        pressure = PressureSensor.current.atmosphericPressure.ReadValue();
+        proximity = ProximitySensor.current.distance.ReadValue();
+        humidity = HumiditySensor.current.relativeHumidity.ReadValue();
+        ambient_temp = AmbientTemperatureSensor.current.ambientTemperature.ReadValue();
+        step_counter = StepCounter.current.stepCounter.ReadValue();
         if (acceleration != null)
         {
             float x = Screen.width / 10;
@@ -161,28 +175,28 @@ public class InputCheck : MonoBehaviour
                 switch (i)
                 {
                     case 0://X
-                        text = string.Format("accel-X:{0}", accelerometer);
+                        text = string.Format("accelerometer:{0}", accelerometer);
                         break;
                     case 1://Y
-                        text = string.Format("accel-Y:{0}", gyroscope);
+                        text = string.Format("gyroscope:{0}", gyroscope);
                         break;
                     case 2://Z
-                        text = string.Format("accel-Z:{0}", gravity);
+                        text = string.Format("gravity:{0}", gravity);
                         break;
                     case 3://X
-                        text = string.Format("comps-X:{0}", attitude);
+                        text = string.Format("attitude:{0}", attitude);
                         break;
                     case 4://Y
-                        text = string.Format("comps-Y:{0}", linear_acceleration);
+                        text = string.Format("linear_acceleration:{0}", linear_acceleration);
                         break;
                     case 5://Z
-                        text = string.Format("comps-Z:{0}", magnetic);
+                        text = string.Format("magnetic:{0}", magnetic);
                         break;
                     case 6://Z
-                        text = string.Format("magneticHeading:{0}", ligth);
+                        text = string.Format("light:{0}", my_light);
                         break;
                     case 7://Z
-                        text = string.Format("trueHeading:{0}", pressure);
+                        text = string.Format("pressure:{0}", pressure);
                         break;
                     /*
                     case 8://Y

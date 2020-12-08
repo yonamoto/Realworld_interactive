@@ -124,49 +124,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &181216802
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 181216804}
-  - component: {fileID: 181216803}
-  m_Layer: 0
-  m_Name: InputCheck
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &181216803
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 181216802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03217412f61e839499e40bd499b23fe0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &181216804
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 181216802}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.103655, y: 120.215515, z: 292.7126}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &392388810
 GameObject:
   m_ObjectHideFlags: 0
@@ -4964,6 +4921,7 @@ GameObject:
   - component: {fileID: 964237139}
   - component: {fileID: 964237138}
   - component: {fileID: 964237137}
+  - component: {fileID: 964237141}
   m_Layer: 0
   m_Name: WaterFall
   m_TagString: Untagged
@@ -5240,7 +5198,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 0.92156863, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -9725,6 +9683,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -38.159, y: 15, z: 0}
+--- !u!114 &964237141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964237136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8dbfd83fbc6a2045b77b4aaad4779ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  accelerometer: {x: 0, y: 0, z: 0}
+  gyroscope: {x: 0, y: 0, z: 0}
+  gravity: {x: 0, y: 0, z: 0}
+  attitude: {x: 0, y: 0, z: 0, w: 0}
+  linear_acceleration: {x: 0, y: 0, z: 0}
+  magnetic: {x: 0, y: 0, z: 0}
+  ligth: 0
+  pressure: 0
+  proximity: 0
+  humidity: 0
+  ambient_temp: 0
+  step_counter: 0
 --- !u!1 &964449540
 GameObject:
   m_ObjectHideFlags: 0

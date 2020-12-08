@@ -2,18 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
 
 public class InputCheck : MonoBehaviour
 {
+    public Vector3 accelerometer;
+    public Vector3 gyroscope;
+    public Vector3 gravity;
+    public Quaternion attitude;
+    public Vector3 linear_acceleration;
+    public Vector3 magnetic;
+    public float ligth;
+    public float pressure;
+    public float proximity;
+    public float humidity;
+    public float ambient_temp;
+    public int step_counter;
+
+
     private Vector3 acceleration;
     private Compass compass;
     private Quaternion gyro;
     private GUIStyle labelStyle;
+    private ParticleSystem.MainModule ps_main;
 
     // Start is called before the first frame update
     void Start()
     {
         //フォント生成
+
         this.labelStyle = new GUIStyle();
         this.labelStyle.fontSize = Screen.height / 40;
         this.labelStyle.normal.textColor = Color.white;
@@ -69,21 +86,61 @@ public class InputCheck : MonoBehaviour
         {
             InputSystem.EnableDevice(StepCounter.current);
         }
-        
 
 
         Debug.Log(string.Format("<b>精度</b>：{0}", Input.compass.headingAccuracy));
         Debug.Log(string.Format("<b>タイムスタンプ</b>：{0}", Input.compass.timestamp));
 
         Input.gyro.enabled = true;
+
+        //ParticleSystem ps = GetComponentInParent<ParticleSystem>();
+        //ps = GetComponent<ParticleSystem>();
+        ParticleSystem ps = this.gameObject.GetComponent<ParticleSystem>();
+        ps_main = ps.main;
+
+        var sp = ps_main.simulationSpeed;
+        sp = 10.0f;
+        var startsize = ps_main.startSize;
+        startsize = 10.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
+        accelerometer = Accelerometer.current.acceleration.ReadValue();
+        gyroscope = UnityEngine.InputSystem.Gyroscope.current.angularVelocity.ReadValue();
+        gravity = GravitySensor.current.gravity.ReadValue();
+        attitude = AttitudeSensor.current.attitude.ReadValue();
+        linear_acceleration = LinearAccelerationSensor.current.acceleration.ReadValue();
+        magnetic = MagneticFieldSensor.current.magneticField.ReadValue();
+        ligth = LightSensor.current.lightLevel.ReadValue();
+        pressure = PressureSensor.current.atmosphericPressure.ReadValue();
+        proximity = ProximitySensor.current.distance.ReadValue();
+        humidity = HumiditySensor.current.relativeHumidity.ReadValue();
+        ambient_temp = AmbientTemperatureSensor.current.ambientTemperature.ReadValue();
+        step_counter = StepCounter.current.stepCounter.ReadValue();
+
+
         this.acceleration = Input.acceleration;
         this.compass = Input.compass;
         this.gyro = Input.gyro.attitude;
+
+        /*
+        ps_main.simulationSpeed = Math.Abs(accelerometer.x + accelerometer.y + accelerometer.z) *10;
+        ps_main.startSize = Math.Abs(magnetic.x + magnetic.y + magnetic.z) *10;
+        ParticleSystem.MinMaxGradient st_col = ps_main.startColor;
+        st_col.color = new Color32((byte)(255 - ligth / 10), (byte)(ps_main.startColor.color.g), (byte)(ps_main.startColor.color.b), (byte)1);
+        Debug.Log((accelerometer.x + accelerometer.y + accelerometer.z) * 10);
+        */
+        
+        var sp = ps_main.simulationSpeed;
+        sp = Math.Abs(accelerometer.x + accelerometer.y + accelerometer.z) / 3;
+        var startsize = ps_main.startSize;
+        startsize = Math.Abs(magnetic.x + magnetic.y + magnetic.z) / 10;
+        Debug.Log(ligth);
+        var st_col = ps_main.startColor;
+        st_col.color = new Color32((byte)(255 - ligth / 10), (byte)(ps_main.startColor.color.g), (byte)(ps_main.startColor.color.b), (byte)1);
+        
     }
 
 
@@ -104,41 +161,43 @@ public class InputCheck : MonoBehaviour
                 switch (i)
                 {
                     case 0://X
-                        text = string.Format("accel-X:{0}", this.acceleration.x);
+                        text = string.Format("accel-X:{0}", accelerometer);
                         break;
                     case 1://Y
-                        text = string.Format("accel-Y:{0}", this.acceleration.y);
+                        text = string.Format("accel-Y:{0}", gyroscope);
                         break;
                     case 2://Z
-                        text = string.Format("accel-Z:{0}", this.acceleration.z);
+                        text = string.Format("accel-Z:{0}", gravity);
                         break;
                     case 3://X
-                        text = string.Format("comps-X:{0}", this.compass.rawVector.x);
+                        text = string.Format("comps-X:{0}", attitude);
                         break;
                     case 4://Y
-                        text = string.Format("comps-Y:{0}", this.compass.rawVector.y);
+                        text = string.Format("comps-Y:{0}", linear_acceleration);
                         break;
                     case 5://Z
-                        text = string.Format("comps-Z:{0}", this.compass.rawVector.z);
+                        text = string.Format("comps-Z:{0}", magnetic);
                         break;
                     case 6://Z
-                        text = string.Format("magneticHeading:{0}", this.compass.magneticHeading);
+                        text = string.Format("magneticHeading:{0}", ligth);
                         break;
                     case 7://Z
-                        text = string.Format("trueHeading:{0}", this.compass.trueHeading);
+                        text = string.Format("trueHeading:{0}", pressure);
                         break;
+                    /*
                     case 8://Y
-                        text = string.Format("gyro-x:{0}", this.gyro.x);
+                        text = string.Format("gyro-x:{0}", proximity);
                         break;
                     case 9://Y
-                        text = string.Format("gyro-y:{0}", this.gyro.y);
+                        text = string.Format("gyro-y:{0}", humidity);
                         break;
                     case 10://Y
-                        text = string.Format("gyro-z:{0}", this.gyro.z);
+                        text = string.Format("gyro-z:{0}", ambient_temp);
                         break;
                     case 11://Y
-                        text = string.Format("gyro-w:{0}", this.gyro.w);
+                        text = string.Format("gyro-w:{0}", step_counter);
                         break;
+                    */
                     default:
                         throw new System.InvalidOperationException();
                 }

@@ -58,7 +58,7 @@ public class InputCheck : MonoBehaviour
         ps_main = ps.main;
 
         var sp = ps_main.simulationSpeed;
-        sp = 10.0f;
+        // sp = 10.0f;
         // ps_main.startSize=10.0f;
         // startsize = ;
     }
@@ -85,9 +85,9 @@ public class InputCheck : MonoBehaviour
         }
 
 
-        // ps_main.simulationSpeed = 2f+Mathf.Max(pressure-950,0) / 3;
+        ps_main.simulationSpeed = 2f+Mathf.Max(pressure-950,0) / 10;
 
-        ps_main.startSize= 3f+Mathf.Min(Mathf.Abs(magnetic.x + magnetic.y + magnetic.z) / 25,8);
+        ps_main.startSize= 3f+Mathf.Min(Mathf.Abs(magnetic.x + magnetic.y + magnetic.z) / 25,5);
         // ps_main.startSize=Mathf.Min(my_light,10);
         Debug.Log(ps_main.startSize);
 

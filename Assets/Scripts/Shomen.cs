@@ -20,7 +20,7 @@ public class Shomen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        audio_source.volume = Mathf.Min( ps_main.startSize.constant, 40) / 40f;
+        audio_source.volume = Mathf.Min( ps_main.startSize.constant, 39) / 40f;
 
     }
 }

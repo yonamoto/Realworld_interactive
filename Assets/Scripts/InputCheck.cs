@@ -18,6 +18,7 @@ public class InputCheck : MonoBehaviour
     public float humidity;
     public float ambient_temp;
     public int step_counter;
+    private int DEBUG_FRAG=1;
 
 
     private Vector3 acceleration;
@@ -48,13 +49,17 @@ public class InputCheck : MonoBehaviour
         {
             InputSystem.EnableDevice(LightSensor.current);
         }
+        if(PressureSensor.current!=null)
+        {
+          InputSystem.EnableDevice(PressureSensor.current);
+        }
 
         ParticleSystem ps = GetComponent<ParticleSystem>();
         ps_main = ps.main;
 
         var sp = ps_main.simulationSpeed;
         sp = 10.0f;
-        ps_main.startSize=10.0f;
+        // ps_main.startSize=10.0f;
         // startsize = ;
     }
 
@@ -74,10 +79,15 @@ public class InputCheck : MonoBehaviour
         {
             my_light = LightSensor.current.lightLevel.ReadValue();
         }
+        if (PressureSensor.current != null)
+        {
+            pressure = PressureSensor.current.atmosphericPressure.ReadValue();
+        }
 
-        ps_main.simulationSpeed = 2f+Mathf.Abs(accelerometer.x + accelerometer.y + accelerometer.z) / 3;
 
-        ps_main.startSize= 2f+Mathf.Min(Mathf.Abs(magnetic.x + magnetic.y + magnetic.z) / 7,40);
+        // ps_main.simulationSpeed = 2f+Mathf.Max(pressure-950,0) / 3;
+
+        ps_main.startSize= 3f+Mathf.Min(Mathf.Abs(magnetic.x + magnetic.y + magnetic.z) / 15,30);
         // ps_main.startSize=Mathf.Min(my_light,10);
         Debug.Log(ps_main.startSize);
 
@@ -92,45 +102,55 @@ public class InputCheck : MonoBehaviour
     //
     void OnGUI()
     {
-        float x = Screen.width / 10;
-        float y = 0;
-        float w = Screen.width * 8 / 10;
-        float h = Screen.height / 20;
+        if(DEBUG_FRAG==1){
+          float x = Screen.width / 10;
+          float y = 0;
+          float w = Screen.width * 8 / 10;
+          float h = Screen.height / 20;
 
-        for (int i = 0; i < 12; i++)
-        {
-            y = Screen.height / 10 + h * i;
-            string text = string.Empty;
+          for (int i = 0; i < 4; i++)
+          {
+              y = Screen.height / 10 + h * i;
+              string text = string.Empty;
 
-            switch (i)
-            {
-                case 0://X
-                    if(Accelerometer.current != null){
-                      text = string.Format("accelerometer:{0}", accelerometer);
-                    }else{
-                      text = "accelerometer:null";
-                    }
-                    break;
-                case 1:
-                    if(MagneticFieldSensor.current != null){
-                      text = string.Format("magnetic:{0}", magnetic);
-                    }else{
-                      text = "magnetic:null";
-                    }
-                    break;
-                case 2:
-                    if(LightSensor.current != null){
-                      text = string.Format("light:{0}", my_light);
-                    }else{
-                      text = "light:null";
-                    }
-                    break;
-                default:
-                    throw new System.InvalidOperationException();
-            }
+              switch (i)
+              {
+                  case 0://X
+                      if(Accelerometer.current != null){
+                        text = string.Format("accelerometer:{0}", accelerometer);
+                      }else{
+                        text = "accelerometer:null";
+                      }
+                      break;
+                  case 1:
+                      if(MagneticFieldSensor.current != null){
+                        text = string.Format("magnetic:{0}", magnetic);
+                      }else{
+                        text = "magnetic:null";
+                      }
+                      break;
+                  case 2:
+                      if(LightSensor.current != null){
+                        text = string.Format("light:{0}", my_light);
+                      }else{
+                        text = "light:null";
+                      }
+                      break;
+                  case 3:
+                      if(PressureSensor.current != null){
+                        text = string.Format("pressure:{0}", pressure);
+                      }else{
+                        text = "pressure:null";
+                      }
+                      break;
+                  default:
+                      throw new System.InvalidOperationException();
+              }
 
-            GUI.Label(new Rect(x, y, w, h), text, this.labelStyle);
+              GUI.Label(new Rect(x, y, w, h), text, this.labelStyle);
+          }
         }
+
     }
 
 }

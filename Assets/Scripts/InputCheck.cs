@@ -84,7 +84,7 @@ public class InputCheck : MonoBehaviour
         // var st_col = ps_main.startColor;
         // st_col.color =
         // Color startcolor =new Color(1f - Mathf.Min(my_light,100)/255, ps_main.startColor.color.g,ps_main.startColor.color.b, 1f);
-        Color startcolor=new Color(1f,1f-Mathf.Min(my_light/50,1f),1f-Mathf.Min(my_light/80,1f),1f);
+        Color startcolor=new Color(Mathf.Min(my_light/80+0.5f,1f),1f,Mathf.Min(my_light/100+0.7f,1f),1f);
         ps_main.startColor=startcolor;
         ps_main.startSize=5.0f;
     }

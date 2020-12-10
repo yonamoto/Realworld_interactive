@@ -77,7 +77,7 @@ public class InputCheck : MonoBehaviour
 
         ps_main.simulationSpeed = 2f+Mathf.Abs(accelerometer.x + accelerometer.y + accelerometer.z) / 3;
 
-        ps_main.startSize= 2f+Mathf.Min(Mathf.Abs(magnetic.x + magnetic.y + magnetic.z) / 10,10);
+        ps_main.startSize= 2f+Mathf.Min(Mathf.Abs(magnetic.x + magnetic.y + magnetic.z) / 7,40);
         // ps_main.startSize=Mathf.Min(my_light,10);
         Debug.Log(ps_main.startSize);
 
@@ -86,7 +86,7 @@ public class InputCheck : MonoBehaviour
         // Color startcolor =new Color(1f - Mathf.Min(my_light,100)/255, ps_main.startColor.color.g,ps_main.startColor.color.b, 1f);
         Color startcolor=new Color(Mathf.Min(my_light/80+0.5f,1f),1f,Mathf.Min(my_light/100+0.7f,1f),1f);
         ps_main.startColor=startcolor;
-        ps_main.startSize=5.0f;
+        // ps_main.startSize=5.0f;
     }
     //
     //

@@ -4922,6 +4922,9 @@ GameObject:
   - component: {fileID: 964237138}
   - component: {fileID: 964237137}
   - component: {fileID: 964237141}
+  - component: {fileID: 964237144}
+  - component: {fileID: 964237143}
+  - component: {fileID: 964237142}
   m_Layer: 0
   m_Name: WaterFall
   m_TagString: Untagged
@@ -4936,7 +4939,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 964237136}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 99801e9fb8a2c4145ae954b2fa557a82, type: 3}
   m_Name: 
@@ -9701,12 +9704,48 @@ MonoBehaviour:
   attitude: {x: 0, y: 0, z: 0, w: 0}
   linear_acceleration: {x: 0, y: 0, z: 0}
   magnetic: {x: 0, y: 0, z: 0}
-  ligth: 0
+  my_light: 0
   pressure: 0
   proximity: 0
   humidity: 0
   ambient_temp: 0
   step_counter: 0
+--- !u!114 &964237142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964237136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3242ab3688a4394ab45eccff41bf926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &964237143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964237136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99801e9fb8a2c4145ae954b2fa557a82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &964237144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964237136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea58aa53cee7fce469e418e99cfcb56b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &964449540
 GameObject:
   m_ObjectHideFlags: 0

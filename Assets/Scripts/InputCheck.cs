@@ -6,7 +6,7 @@ using System;
 
 public class InputCheck : MonoBehaviour
 {
-    public Vector3 accelerometer;
+    //public Vector3 accelerometer;
     public Vector3 gyroscope;
     public Vector3 gravity;
     public Quaternion attitude;
@@ -107,40 +107,88 @@ public class InputCheck : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        accelerometer = Accelerometer.current.acceleration.ReadValue();
-        gyroscope = UnityEngine.InputSystem.Gyroscope.current.angularVelocity.ReadValue();
-        gravity = GravitySensor.current.gravity.ReadValue();
-        attitude = AttitudeSensor.current.attitude.ReadValue();
-        linear_acceleration = LinearAccelerationSensor.current.acceleration.ReadValue();
-        magnetic = MagneticFieldSensor.current.magneticField.ReadValue();
-        ligth = LightSensor.current.lightLevel.ReadValue();
-        pressure = PressureSensor.current.atmosphericPressure.ReadValue();
-        proximity = ProximitySensor.current.distance.ReadValue();
-        humidity = HumiditySensor.current.relativeHumidity.ReadValue();
-        ambient_temp = AmbientTemperatureSensor.current.ambientTemperature.ReadValue();
-        step_counter = StepCounter.current.stepCounter.ReadValue();
-
-
-        this.acceleration = Input.acceleration;
-        this.compass = Input.compass;
-        this.gyro = Input.gyro.attitude;
-
         /*
-        ps_main.simulationSpeed = Math.Abs(accelerometer.x + accelerometer.y + accelerometer.z) *10;
-        ps_main.startSize = Math.Abs(magnetic.x + magnetic.y + magnetic.z) *10;
-        ParticleSystem.MinMaxGradient st_col = ps_main.startColor;
-        st_col.color = new Color32((byte)(255 - ligth / 10), (byte)(ps_main.startColor.color.g), (byte)(ps_main.startColor.color.b), (byte)1);
-        Debug.Log((accelerometer.x + accelerometer.y + accelerometer.z) * 10);
+        if (Accelerometer.current != null)
+        {
+            accelerometer = Accelerometer.current.acceleration.ReadValue();
+        }
         */
-        
-        var sp = ps_main.simulationSpeed;
-        sp = Math.Abs(accelerometer.x + accelerometer.y + accelerometer.z) / 3;
-        var startsize = ps_main.startSize;
-        startsize = Math.Abs(magnetic.x + magnetic.y + magnetic.z) / 10;
-        Debug.Log(ligth);
-        var st_col = ps_main.startColor;
-        st_col.color = new Color32((byte)(255 - ligth / 10), (byte)(ps_main.startColor.color.g), (byte)(ps_main.startColor.color.b), (byte)1);
-        
+        if (GravitySensor.current != null)
+        {
+            gravity = GravitySensor.current.gravity.ReadValue();
+        }
+        if (AttitudeSensor.current != null)
+        {
+            attitude = AttitudeSensor.current.attitude.ReadValue();
+        }
+        if (LinearAccelerationSensor.current != null)
+        {
+            linear_acceleration = LinearAccelerationSensor.current.acceleration.ReadValue();
+        }
+        if (MagneticFieldSensor.current != null)
+        {
+            magnetic = MagneticFieldSensor.current.magneticField.ReadValue();
+        }
+        if (LightSensor.current != null)
+        {
+            ligth = LightSensor.current.lightLevel.ReadValue();
+        }
+        if (PressureSensor.current != null)
+        {
+            pressure = PressureSensor.current.atmosphericPressure.ReadValue();
+        }
+        if (ProximitySensor.current != null)
+        {
+            proximity = ProximitySensor.current.distance.ReadValue();
+        }
+        if (HumiditySensor.current != null)
+        {
+            humidity = HumiditySensor.current.relativeHumidity.ReadValue();
+        }
+        if (AmbientTemperatureSensor.current != null)
+        {
+            ambient_temp = AmbientTemperatureSensor.current.ambientTemperature.ReadValue();
+        }
+        if (StepCounter.current != null)
+        {
+            step_counter = StepCounter.current.stepCounter.ReadValue();
+        }
+            /*
+            gyroscope = UnityEngine.InputSystem.Gyroscope.current.angularVelocity.ReadValue();
+            gravity = GravitySensor.current.gravity.ReadValue();
+            attitude = AttitudeSensor.current.attitude.ReadValue();
+            linear_acceleration = LinearAccelerationSensor.current.acceleration.ReadValue();
+            magnetic = MagneticFieldSensor.current.magneticField.ReadValue();
+            ligth = LightSensor.current.lightLevel.ReadValue();
+            pressure = PressureSensor.current.atmosphericPressure.ReadValue();
+            proximity = ProximitySensor.current.distance.ReadValue();
+            humidity = HumiditySensor.current.relativeHumidity.ReadValue();
+            ambient_temp = AmbientTemperatureSensor.current.ambientTemperature.ReadValue();
+            step_counter = StepCounter.current.stepCounter.ReadValue();
+            */
+
+         this.acceleration = Input.acceleration;
+         this.compass = Input.compass;
+         this.gyro = Input.gyro.attitude;
+
+            
+         //ps_main.simulationSpeed = Math.Abs(accelerometer.x + accelerometer.y + accelerometer.z) *10;
+         //ps_main.simulationSpeed = Math.Abs(acceleration.x + acceleration.y + acceleration.z) *10;
+         ps_main.simulationSpeed = Math.Abs(gravity.x + gravity.y + gravity.z) ;
+         ps_main.startSize = Math.Abs(magnetic.x + magnetic.y + magnetic.z) /5;
+         ParticleSystem.MinMaxGradient st_col = ps_main.startColor;
+         st_col.color = new Color32((byte)(255 - ligth / 3), (byte)(ps_main.startColor.color.g), (byte)(ps_main.startColor.color.b), (byte)1);
+            
+            
+            /*
+            var sp = ps_main.simulationSpeed;
+            sp = Math.Abs(accelerometer.x + accelerometer.y + accelerometer.z) / 3;
+            var startsize = ps_main.startSize;
+            startsize = Math.Abs(magnetic.x + magnetic.y + magnetic.z) / 10;
+            Debug.Log(ligth);
+            var st_col = ps_main.startColor;
+            st_col.color = new Color32((byte)(255 - ligth / 10), (byte)(ps_main.startColor.color.g), (byte)(ps_main.startColor.color.b), (byte)1);
+            */
     }
 
 
@@ -161,7 +209,8 @@ public class InputCheck : MonoBehaviour
                 switch (i)
                 {
                     case 0://X
-                        text = string.Format("accel-X:{0}", accelerometer);
+                        //text = string.Format("accel-X:{0}", accelerometer);
+                        text = string.Format("accel-X:{0}", acceleration);
                         break;
                     case 1://Y
                         text = string.Format("accel-Y:{0}", gyroscope);
@@ -198,8 +247,10 @@ public class InputCheck : MonoBehaviour
                         text = string.Format("gyro-w:{0}", step_counter);
                         break;
                     */
+                    /*
                     default:
                         throw new System.InvalidOperationException();
+                    */
                 }
 
                 GUI.Label(new Rect(x, y, w, h), text, this.labelStyle);

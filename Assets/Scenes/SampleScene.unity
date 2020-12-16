@@ -5699,6 +5699,7 @@ GameObject:
   - component: {fileID: 1855312953}
   - component: {fileID: 1855312956}
   - component: {fileID: 1855312957}
+  - component: {fileID: 1855312958}
   m_Layer: 0
   m_Name: Galaxy
   m_TagString: Untagged
@@ -5962,7 +5963,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.83137256, g: 1, b: 1, a: 1}
+      maxColor: {r: 1, g: 0.98039216, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -10609,3 +10610,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eea150bbbd7ed24aa1d260d02e39891, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1855312958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1855312952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0af30e35b0732b04c80132459d7bdf27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  accelerometer: {x: 0, y: 0, z: 0}
+  gyroscope: {x: 0, y: 0, z: 0}
+  gravity: {x: 0, y: 0, z: 0}
+  attitude: {x: 0, y: 0, z: 0, w: 0}
+  linear_acceleration: {x: 0, y: 0, z: 0}
+  magnetic: {x: 0, y: 0, z: 0}
+  my_light: 0
+  pressure: 0
+  proximity: 0
+  humidity: 0
+  ambient_temp: 0
+  step_counter: 0

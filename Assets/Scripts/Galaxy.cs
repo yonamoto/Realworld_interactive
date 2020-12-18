@@ -37,21 +37,27 @@ public class Galaxy : MonoBehaviour
         this.labelStyle.normal.textColor = Color.white;
 
 
-        if (Accelerometer.current != null)
+        if(Accelerometer.current != null)
         {
-            InputSystem.EnableDevice(Accelerometer.current);
+          accelerometer = Accelerometer.current.acceleration.ReadValue();
         }
         if (MagneticFieldSensor.current != null)
         {
-            InputSystem.EnableDevice(UnityEngine.InputSystem.MagneticFieldSensor.current);
+            magnetic = MagneticFieldSensor.current.magneticField.ReadValue();
+        }else{
+            magnetic=new Vector3(-5f,20f,-5f);
         }
         if (LightSensor.current != null)
         {
-            InputSystem.EnableDevice(LightSensor.current);
+            my_light = LightSensor.current.lightLevel.ReadValue();
+        }else{
+            my_light = 8f;
         }
         if (PressureSensor.current != null)
         {
-            InputSystem.EnableDevice(PressureSensor.current);
+            pressure = PressureSensor.current.atmosphericPressure.ReadValue();
+        }else{
+            pressure = 1024f;
         }
 
         ParticleSystem ps = GetComponent<ParticleSystem>();

@@ -69,32 +69,37 @@ public class InputCheck : MonoBehaviour
         if(Accelerometer.current != null)
         {
           accelerometer = Accelerometer.current.acceleration.ReadValue();
-        }else{
         }
         if (MagneticFieldSensor.current != null)
         {
             magnetic = MagneticFieldSensor.current.magneticField.ReadValue();
+        }else{
+            magnetic=new Vector3(-5f,20f,-5f);
         }
         if (LightSensor.current != null)
         {
             my_light = LightSensor.current.lightLevel.ReadValue();
+        }else{
+            my_light = 8f;
         }
         if (PressureSensor.current != null)
         {
             pressure = PressureSensor.current.atmosphericPressure.ReadValue();
+        }else{
+            pressure = 1024f;
         }
 
 
-        ps_main.simulationSpeed = 0.5f+Mathf.Max(pressure-950,0) / 30;
+        ps_main.simulationSpeed = 0.55f+Mathf.Max(pressure-950,0) / 110;
 
-        ps_main.startSize= 1f+Mathf.Min(Mathf.Abs(magnetic.x + magnetic.y + magnetic.z) / 10,5);
+        ps_main.startSize= 1.5f+Mathf.Min(Mathf.Sqrt(Mathf.Abs(magnetic.x)+Mathf.Abs(magnetic.y) + Mathf.Abs(magnetic.z)) / 10 ,5);
         // ps_main.startSize=Mathf.Min(my_light,10);
         Debug.Log(ps_main.startSize);
 
         // var st_col = ps_main.startColor;
         // st_col.color =
         // Color startcolor =new Color(1f - Mathf.Min(my_light,100)/255, ps_main.startColor.color.g,ps_main.startColor.color.b, 1f);
-        Color startcolor=new Color(Mathf.Min(my_light/80+0.5f,1f),1f,Mathf.Min(my_light/100+0.7f,1f),1f);
+        Color startcolor=new Color(Mathf.Min(my_light/100+0.4f,1f),Mathf.Min(my_light/500+0.90f,1f),Mathf.Min(Mathf.Sqrt(my_light)/40+0.65f,1f),Mathf.Min(my_light/130+0.85f,1f));
         ps_main.startColor=startcolor;
         // ps_main.startSize=5.0f;
     }

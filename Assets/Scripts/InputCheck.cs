@@ -18,8 +18,9 @@ public class InputCheck : MonoBehaviour
     public float humidity;
     public float ambient_temp;
     public int step_counter;
-    private int DEBUG_FRAG=1;
-
+    // private int DEBUG_FRAG=1;
+    GameObject infoButton;
+    DataInfo datainfo;
 
     private Vector3 acceleration;
     private Compass compass;
@@ -31,7 +32,8 @@ public class InputCheck : MonoBehaviour
     void Start()
     {
         //フォント生成
-
+        infoButton=GameObject.Find("infoButton");
+        datainfo=infoButton.GetComponent<DataInfo>();
         this.labelStyle = new GUIStyle();
         this.labelStyle.fontSize = Screen.height / 40;
         this.labelStyle.normal.textColor = Color.white;
@@ -68,22 +70,26 @@ public class InputCheck : MonoBehaviour
     {
         if(Accelerometer.current != null)
         {
+          InputSystem.EnableDevice(Accelerometer.current);
           accelerometer = Accelerometer.current.acceleration.ReadValue();
         }
         if (MagneticFieldSensor.current != null)
         {
+            InputSystem.EnableDevice(UnityEngine.InputSystem.MagneticFieldSensor.current);
             magnetic = MagneticFieldSensor.current.magneticField.ReadValue();
         }else{
             magnetic=new Vector3(-5f,20f,-5f);
         }
         if (LightSensor.current != null)
         {
+            InputSystem.EnableDevice(LightSensor.current);
             my_light = LightSensor.current.lightLevel.ReadValue();
         }else{
             my_light = 8f;
         }
         if (PressureSensor.current != null)
         {
+            InputSystem.EnableDevice(PressureSensor.current);
             pressure = PressureSensor.current.atmosphericPressure.ReadValue();
         }else{
             pressure = 1024f;
@@ -107,7 +113,7 @@ public class InputCheck : MonoBehaviour
     //
     void OnGUI()
     {
-        if(DEBUG_FRAG==1){
+        if(datainfo.GetDebugFrag()==1){
           float x = Screen.width / 10;
           float y = 0;
           float w = Screen.width * 8 / 10;

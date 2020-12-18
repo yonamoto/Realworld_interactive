@@ -18,7 +18,9 @@ public class Galaxy : MonoBehaviour
     public float humidity;
     public float ambient_temp;
     public int step_counter;
-    private int DEBUG_FRAG = 1;
+    GameObject infoButton;
+    DataInfo datainfo;
+
 
 
     private Vector3 acceleration;
@@ -30,6 +32,8 @@ public class Galaxy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        infoButton=GameObject.Find("infoButton");
+        datainfo=infoButton.GetComponent<DataInfo>();
         //フォント生成
 
         this.labelStyle = new GUIStyle();
@@ -72,24 +76,31 @@ public class Galaxy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Accelerometer.current != null)
+        if(Accelerometer.current != null)
         {
-            accelerometer = Accelerometer.current.acceleration.ReadValue();
-        }
-        else
-        {
+          InputSystem.EnableDevice(Accelerometer.current);
+          accelerometer = Accelerometer.current.acceleration.ReadValue();
         }
         if (MagneticFieldSensor.current != null)
         {
+            InputSystem.EnableDevice(UnityEngine.InputSystem.MagneticFieldSensor.current);
             magnetic = MagneticFieldSensor.current.magneticField.ReadValue();
+        }else{
+            magnetic=new Vector3(-5f,20f,-5f);
         }
         if (LightSensor.current != null)
         {
+            InputSystem.EnableDevice(LightSensor.current);
             my_light = LightSensor.current.lightLevel.ReadValue();
+        }else{
+            my_light = 8f;
         }
         if (PressureSensor.current != null)
         {
+            InputSystem.EnableDevice(PressureSensor.current);
             pressure = PressureSensor.current.atmosphericPressure.ReadValue();
+        }else{
+            pressure = 1024f;
         }
 
 
@@ -109,7 +120,7 @@ public class Galaxy : MonoBehaviour
     //
     void OnGUI()
     {
-        if (DEBUG_FRAG == 1)
+        if (datainfo.GetDebugFrag()==1)
         {
             float x = Screen.width / 10;
             float y = 0;

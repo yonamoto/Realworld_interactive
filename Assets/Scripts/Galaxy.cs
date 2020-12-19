@@ -105,14 +105,15 @@ public class Galaxy : MonoBehaviour
 
 
         ps_main.simulationSpeed = 0.1f + Mathf.Max(pressure - 950, 0) / 150;
-        ps_main.startSize = 0.1f + Mathf.Min(Mathf.Abs(magnetic.x + magnetic.y + magnetic.z) / 500, 0.5f);
+        ps_main.startSize = 0.1f + Mathf.Min(Mathf.Abs(magnetic.x + magnetic.y + magnetic.z) / 300, 0.5f);
         // ps_main.startSize=Mathf.Min(my_light,10);
         Debug.Log(ps_main.startSize);
 
         // var st_col = ps_main.startColor;
         // st_col.color =
         // Color startcolor =new Color(1f - Mathf.Min(my_light,100)/255, ps_main.startColor.color.g,ps_main.startColor.color.b, 1f);
-        Color startcolor = new Color(Mathf.Min(my_light / 80 + 0.5f, 1f), 1f, Mathf.Min(my_light / 100 + 0.7f, 1f), 1f);
+        //Color startcolor = new Color(Mathf.Min(my_light / 80 + 0.5f, 1f), 1f, Mathf.Min(my_light / 100 + 0.7f, 1f), 1f);
+        Color startcolor = new Color(Mathf.Min(my_light / 400 + 0.5f, 1f), 1f, Mathf.Min(my_light / 500 + 0.7f, 1f), 1f);
         ps_main.startColor = startcolor;
         // ps_main.startSize=5.0f;
     }

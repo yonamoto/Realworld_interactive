@@ -98,7 +98,7 @@ public class InputCheck : MonoBehaviour
 
         ps_main.simulationSpeed = 0.55f+Mathf.Max(pressure-950,0) / 110;
 
-        ps_main.startSize= 1.5f+Mathf.Min(Mathf.Sqrt(Mathf.Abs(magnetic.x)+Mathf.Abs(magnetic.y) + Mathf.Abs(magnetic.z)) / 10 ,5);
+        ps_main.startSize= 1.5f+Mathf.Min(Mathf.Sqrt(Mathf.Abs(magnetic.x)+Mathf.Abs(magnetic.y) + Mathf.Abs(magnetic.z)) / 6 ,5);
         // ps_main.startSize=Mathf.Min(my_light,10);
         Debug.Log(ps_main.startSize);
 
